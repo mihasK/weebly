@@ -4,20 +4,25 @@ import hmac
 import json
 import base64
 
-WEEBLY_API_KEY = 'YOUR_API_KEY'
-WEEBLY_API_SECRET = 'YOUR_API_SECRET'
-WEEBLY_TEST_ACCOUNT_ID = 'YOUR_TEST_ACCOUNT'
+class WeeblyClient(object):
 
-base_url = 'https://api.weeblycloud.com/'
+    WEEBLY_API_KEY = 'YOUR_API_KEY'
+    WEEBLY_API_SECRET = 'YOUR_API_SECRET'
+    WEEBLY_TEST_ACCOUNT_ID = 'YOUR_TEST_ACCOUNT'
 
+    base_url = 'https://api.weeblycloud.com/'
 
-def weebly_hash(my_content):
-    my_hmac = hmac.new(WEEBLY_API_SECRET, my_content, digestmod=hashlib.sha256).hexdigest()
-    my_hash = base64.b64encode(my_hmac)
+    def __init__(self, key, secret, account_id):
+        self.WEEBLY_API_KEY = key
+        # the same for other parameters
 
-    return my_hash
+    def weebly_hash(self, my_content):
+        my_hmac = hmac.new(self.WEEBLY_API_SECRET, my_content, digestmod=hashlib.sha256).hexdigest()
+        my_hash = base64.b64encode(my_hmac)
+    
+        return my_hash
 
-
+#the same for other functions - make them methods of class
 def post(my_url, my_data=None):
 
     # get url
