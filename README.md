@@ -1,4 +1,4 @@
-# python_weebly_api
+# weebly_api
 Python functions to simplify interfacing with weebly cloud api
 
 Requires that you fetch the API_KEY and API_SECRET and assign them as follows:
@@ -18,13 +18,13 @@ The following functions are provided:
 * response = weebly_put(url, data)
 * response = weebly_patch(url, data)
 * response = weebly_delete(url)
+* response = weebly_loginlink(user_id)
 
 Url should NOT include the base https://api.weeblycloud.com.
 Check Weebly documentation for specifics on format of data.
 
 Example usage:
 
-    
         # create new user account
         my_url = 'user/'
         my_data = {'email': 'tester@fake.com'}
