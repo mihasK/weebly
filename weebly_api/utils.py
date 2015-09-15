@@ -131,25 +131,6 @@ def weebly_delete(my_url):
     return resp
 
 
-def weebly_loginlink(user_id):
-    my_url = 'user/' + user_id + '/loginlink'
-    full_url = base_url + my_url
-
-    #get hash
-    my_content = 'POST' + '\n' + my_url + '\n'
-    my_hash = weebly_hash(my_content)
-
-    # get headers
-    post_header = {
-        'X-Public-Key': WEEBLY_API_KEY,
-        'X-Signed-Request-Hash': my_hash,
-    }
-
-    resp = requests.post(full_url)
-
-    return resp
-
-
 def create_user():
     # create test account
     my_url = 'user/'

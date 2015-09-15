@@ -1,7 +1,5 @@
 from .utils import *
 
-TEST_ACCOUNT_ID = WEEBLY_TEST_ACCOUNT_ID
-
 
 # Create your tests here.
 class WeeblyApiTests(TestCase):
