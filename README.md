@@ -1,10 +1,13 @@
 # weebly
 Python functions to simplify interfacing with weebly cloud api
 
-Requires that you fetch the API_KEY and API_SECRET and assign them as follows:
+Setup:
+Fetch API_KEY and API_SECRET from your Weebly Cloud Dashboard and import them. Also include the user_id of a 
+test account.
 
 * WEEBLY_API_KEY
 * WEEBLY_API_SECRET
+* WEEBLY_TEST_ACCOUNT_ID
 
 For testing, you should create a user account set the user_id as:
 
