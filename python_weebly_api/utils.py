@@ -4,17 +4,11 @@ import hmac
 import json
 import base64
 
-from . import secret_keys
-
-API_KEY         = WEEBLY_API_KEY
-API_SECRET      = WEEBLY_API_SECRET
-USER_ID         = WEEBLY_TEST_ACCOUNT_ID
-
 base_url = 'https://api.weeblycloud.com/'
 
 
 def weebly_hash(my_content):
-    my_hmac = hmac.new(API_SECRET, my_content, digestmod=hashlib.sha256).hexdigest()
+    my_hmac = hmac.new(WEEBLY_API_SECRET, my_content, digestmod=hashlib.sha256).hexdigest()
     my_hash = base64.b64encode(my_hmac)
 
     return my_hash
@@ -36,13 +30,13 @@ def weebly_post(my_url, my_data=None):
     # get headers
     if (my_data == None):
         post_header = {
-            'X-Public-Key': API_KEY,
+            'X-Public-Key': WEEBLY_API_KEY,
             'X-Signed-Request-Hash': my_hash,
         }
     else:
         post_header = {
             'Content-Type': 'application/json',
-            'X-Public-Key': API_KEY,
+            'X-Public-Key': WEEBLY_API_KEY,
             'X-Signed-Request-Hash': my_hash,
         }
 
@@ -66,7 +60,7 @@ def weebly_get(my_url):
 
     # get headers
     get_header = {
-        'X-Public-Key': API_KEY,
+        'X-Public-Key': WEEBLY_API_KEY,
         'X-Signed-Request-Hash': my_hash,
     }
 
@@ -87,7 +81,7 @@ def weebly_put(my_url, my_data):
     # get headers
     put_header = {
         'Content-Type': 'application/json',
-        'X-Public-Key': API_KEY,
+        'X-Public-Key': WEEBLY_API_KEY,
         'X-Signed-Request-Hash': my_hash,
     }
 
@@ -108,7 +102,7 @@ def weebly_patch(my_url, my_data):
     # get headers
     patch_header = {
         'Content-Type': 'application/json',
-        'X-Public-Key': API_KEY,
+        'X-Public-Key': WEEBLY_API_KEY,
         'X-Signed-Request-Hash': my_hash,
     }
 
@@ -127,7 +121,7 @@ def weebly_delete(my_url):
 
     # get headers
     post_header = {
-        'X-Public-Key': API_KEY,
+        'X-Public-Key': WEEBLY_API_KEY,
         'X-Signed-Request-Hash': my_hash,
     }
 
@@ -147,7 +141,7 @@ def weebly_loginlink(user_id):
 
     # get headers
     post_header = {
-        'X-Public-Key': API_KEY,
+        'X-Public-Key': WEEBLY_API_KEY,
         'X-Signed-Request-Hash': my_hash,
     }
 
@@ -171,11 +165,11 @@ def create_user():
 
 def create_site():
     # create test site
-    my_url = 'user/' + USER_ID + '/site'
-    my_domain = USER_ID + '.com'
+    my_url = 'user/' + WEEBLY_TEST_ACCOUNT_ID + '/site'
+    my_domain = WEEBLY_TEST_ACCOUNT_ID + '.com'
     my_data = {'domain': my_domain, 'site_title': 'My Test Website'}
     resp = weebly_post(my_url, my_data)
     if (resp.status_code == 200):
-        print('Successfully created ' + USER_ID + '.com')
+        print('Successfully created ' + WEEBLY_TEST_ACCOUNT_ID + '.com')
     else:
-        print('Couldn\'t create ' + USER_ID + '.com. Does it already exist?')
+        print('Couldn\'t create ' + WEEBLY_TEST_ACCOUNT_ID + '.com. Does it already exist?')
