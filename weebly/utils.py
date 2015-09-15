@@ -14,7 +14,7 @@ def weebly_hash(my_content):
     return my_hash
 
 
-def weebly_post(my_url, my_data=None):
+def post(my_url, my_data=None):
 
     # get url
     full_url = base_url + my_url
@@ -49,7 +49,7 @@ def weebly_post(my_url, my_data=None):
     return resp
 
 
-def weebly_get(my_url):
+def get(my_url):
 
     # get url
     full_url = base_url + my_url
@@ -70,7 +70,7 @@ def weebly_get(my_url):
     return resp
 
 
-def weebly_put(my_url, my_data):
+def put(my_url, my_data):
     # get url
     full_url = base_url + my_url
 
@@ -91,7 +91,7 @@ def weebly_put(my_url, my_data):
     return resp
 
 
-def weebly_patch(my_url, my_data):
+def patch(my_url, my_data):
     # get url
     full_url = base_url + my_url
 
@@ -112,7 +112,7 @@ def weebly_patch(my_url, my_data):
     return resp
 
 
-def weebly_delete(my_url):
+def delete(my_url):
     full_url = base_url + my_url
 
     #get hash
@@ -135,7 +135,7 @@ def create_user():
     # create test account
     my_url = 'user/'
     my_data = {'email': 'tester@fake.com'}
-    resp = weebly_post(my_url, my_data)
+    resp = post(my_url, my_data)
 
     if (resp.status_code == 200):
         user_id = resp.json()['user']['user_id']
@@ -149,7 +149,7 @@ def create_site():
     my_url = 'user/' + WEEBLY_TEST_ACCOUNT_ID + '/site'
     my_domain = WEEBLY_TEST_ACCOUNT_ID + '.com'
     my_data = {'domain': my_domain, 'site_title': 'My Test Website'}
-    resp = weebly_post(my_url, my_data)
+    resp = post(my_url, my_data)
     if (resp.status_code == 200):
         print('Successfully created ' + WEEBLY_TEST_ACCOUNT_ID + '.com')
     else:
