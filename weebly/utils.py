@@ -4,6 +4,10 @@ import hmac
 import json
 import base64
 
+WEEBLY_API_KEY = 'YOUR_API_KEY'
+WEEBLY_API_SECRET = 'YOUR_API_SECRET'
+WEEBLY_TEST_ACCOUNT_ID = 'YOUR_TEST_ACCOUNT'
+
 base_url = 'https://api.weeblycloud.com/'
 
 
@@ -131,26 +135,3 @@ def delete(my_url):
     return resp
 
 
-def create_user():
-    # create test account
-    my_url = 'user/'
-    my_data = {'email': 'tester@fake.com'}
-    resp = post(my_url, my_data)
-
-    if (resp.status_code == 200):
-        user_id = resp.json()['user']['user_id']
-        print('Successfully created tester@fake.com')
-    else:
-        print('Couldn\'t create tester@fake.com. Does it already exist?')
-
-
-def create_site():
-    # create test site
-    my_url = 'user/' + WEEBLY_TEST_ACCOUNT_ID + '/site'
-    my_domain = WEEBLY_TEST_ACCOUNT_ID + '.com'
-    my_data = {'domain': my_domain, 'site_title': 'My Test Website'}
-    resp = post(my_url, my_data)
-    if (resp.status_code == 200):
-        print('Successfully created ' + WEEBLY_TEST_ACCOUNT_ID + '.com')
-    else:
-        print('Couldn\'t create ' + WEEBLY_TEST_ACCOUNT_ID + '.com. Does it already exist?')
